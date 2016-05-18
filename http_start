@@ -1,1 +1,0 @@
-/usr/sbin/httpd -f ${PWD}/conf/httpd.conf

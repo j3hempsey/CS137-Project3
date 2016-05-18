@@ -1,0 +1,4 @@
+#!/bin/bash
+unset SSH_ASKPASS
+`git commit -a`
+`git push orign master`

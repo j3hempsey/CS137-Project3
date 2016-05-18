@@ -1,0 +1,3 @@
+#!/bin/bash
+unset SSH_ASKPASS
+git pull origin master
