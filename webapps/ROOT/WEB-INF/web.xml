@@ -52,6 +52,14 @@
       <url-pattern>/product?id</url-pattern>
   </servlet-mapping>
 
+  <!-- Session counter configuration -->
+    <listener>
+        <listener-class>SessionCounter</listener-class>
+    </listener>
+
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
   <!-- exception-type related error pages -->
   <error-page>
     <exception-type>java.lang.Exception</exception-type>

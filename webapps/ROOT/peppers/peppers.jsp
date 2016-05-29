@@ -1,5 +1,6 @@
 <%@page import  = "java.util.ArrayList" %>
 <%@page import  = "Models.Pepper"%>
+<%@page import  = "SessionCounter"%>
 
 <html>
     <head>
@@ -15,6 +16,8 @@
     </head>
     <body>
 		<h1>Peter sells peppers</h1>
+		<% SessionCounter counter = (SessionCounter) session.getAttribute(SessionCounter.COUNTER); %>
+		<h2 id='num-viewers'>Current Viewers: <%= counter.getActiveSessionNumber() %></h2>
 		<% ArrayList<Pepper> peppers = (ArrayList<Pepper>)request.getAttribute("peppers");
   if(peppers.size() > 0) {
   %>
