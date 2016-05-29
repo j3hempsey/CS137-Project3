@@ -30,7 +30,7 @@
 					 height='180' width='300' > </td>
 								</div>
 								<div class='product-img'>
-								<img src='<%= pepper.ImageUrl %>' alt='<%= pepper.PepperType %>'
+								<img src='<%= pepper.ImageUrlAlt %>' alt='<%= pepper.PepperType %>'
 					 height='180' width='300' >
 								</div>
 						</tr>

@@ -34,6 +34,7 @@ public class PeppersRepository {
                 pepper.ID = rs.getInt("ID");
                 pepper.Url = rs.getString("url");
                 pepper.ImageUrl = rs.getString("image_url");
+				pepper.ImageUrlAlt = rs.getString("image_url_alt");
                 pepper.PepperName = rs.getString("pepper_name");
                 pepper.PepperType = rs.getString("pepper_type");
                 pepper.SpicyCreative = rs.getString("spicy_creative");

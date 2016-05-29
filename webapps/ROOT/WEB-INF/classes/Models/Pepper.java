@@ -19,6 +19,7 @@ public class Pepper {
     public int ID;
     public String Url;
     public String ImageUrl;
+	public String ImageUrlAlt;
     public String PepperName;
     public String PepperType;
     public String SpicyCreative;
