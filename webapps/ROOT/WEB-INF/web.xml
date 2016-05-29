@@ -21,6 +21,7 @@
   <description>
      Welcome to Tomcat
   </description>
+  <!-- Home Servlet -->
   <servlet>
       <servlet-name>homeServlet</servlet-name>
       <servlet-class>HomeServlet</servlet-class>
@@ -29,4 +30,32 @@
       <servlet-name>homeServlet</servlet-name>
       <url-pattern></url-pattern>
   </servlet-mapping>
+
+  <!-- Product Detail Servlet -->
+  
+  <servlet>
+      <servlet-name>productDetailServlet</servlet-name>
+      <servlet-class>ProductDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>productDetailServlet</servlet-name>
+      <url-pattern>/product</url-pattern>
+  </servlet-mapping>
+  
+
+  <!-- exception-type related error pages -->
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>
+          javax.servlet.ServletException
+    </exception-type >
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.io.IOException</exception-type >
+    <location>/error.jsp</location>
+  </error-page>
 </web-app>
