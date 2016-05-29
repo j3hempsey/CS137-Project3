@@ -41,7 +41,16 @@
       <servlet-name>productDetailServlet</servlet-name>
       <url-pattern>/product</url-pattern>
   </servlet-mapping>
-  
+
+  <!-- Product Page Servlet -->
+  <servlet>
+      <servlet-name>pepperServlet</servlet-name>
+      <servlet-class>PepperServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>pepperServlet</servlet-name>
+      <url-pattern>/product?id</url-pattern>
+  </servlet-mapping>
 
   <!-- exception-type related error pages -->
   <error-page>
