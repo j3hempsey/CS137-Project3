@@ -45,6 +45,7 @@ public class PeppersRepository {
                 peppers.add(pepper);
             }
             
+            stmt.close();
             return peppers;
             
         } catch(Exception ex) {
@@ -78,6 +79,7 @@ public class PeppersRepository {
                 pepper.Description = rs.getString("description");
             }
             
+            stmt.close();
             return pepper;
             
         } catch(Exception ex) {

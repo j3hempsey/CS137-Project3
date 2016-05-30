@@ -19,6 +19,11 @@ import java.util.ArrayList;
  */
 public class OrdersRepository {
     
+    /**
+     * Gets and order by Id
+     * @param id
+     * @return 
+     */
     public Order getOrderById(int id) {
         try {
             Order order = new Order();
@@ -52,11 +57,42 @@ public class OrdersRepository {
                 }
             }
             
+            stmt.close();
         } catch(SQLException ex) {
             
         }
         
         return null;
+    }
+    
+    /**
+     * Creates and order in the database
+     * @param order
+     * @return 
+     */
+    public int createOrder(Order order) {
+        try {
+            Connection conn = DatabaseContext.getDbConnection();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(String.format("INSERT INTO orders (first_name, last_name, cc_number, street_addr, phone_num, zip, state, ship_speed) VALUES (%1$s, %2$s,%3$s,%4$s,%5$s,%6$s,%7$s,%8$s)", 
+                                            order.FirstName, order.LastName, order.CreditCardNumber, order.StreetAddress, order.PhoneNumber, order.Zip, order.State, order.ShippingSpeed), Statement.RETURN_GENERATED_KEYS);
+            
+            //Get order id of the inserted order.
+            int orderId = -1;
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()){
+               orderId = rs.getInt(1);
+            }
+
+            for(OrderItem orderItem : order.OrderItems) {
+               stmt.executeUpdate(String.format("INSERT INTO orderitems (order_id, pepper_id, quantity, subtotal) VALUES (%1$s, %2$s,%3$s,%4$s)", 
+                                            orderId, orderItem.PepperID, orderItem.Quantity, orderItem.Subtotal)); 
+            }
+            
+            stmt.close();
+        } catch(SQLException ex) { };
+        
+        return -1;
     }
     
 }
