@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import  = "Models.Pepper"%>
 <%@page import  = "Models.ShoppingCart"%>
-<%--@page import  = "Models.SessionCounter"--%>
+<%@page import  = "Models.SessionCounter" %>
 <%@page import  = "java.util.ArrayList" %>
 
 <!DOCTYPE html>
@@ -34,9 +34,11 @@
             <%
                 }
             %>
+		<% SessionCounter counter = (SessionCounter) session.getAttribute("session-counter"); %>
         <% Pepper p = (Pepper) request.getAttribute("pepper"); %>
         <a href="/" style="text-decoration: none;">
             <h1>Peter sells peppers</h1>
+            <h2>Currently Viewing: <%= counter.getActiveSessionNumber() %> </h2>
         </a>
         <div class='center-div' id='management' >
                     <a href='../management/management.html'>Management Team</a>

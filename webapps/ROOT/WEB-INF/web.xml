@@ -41,7 +41,13 @@
       <servlet-name>productDetailServlet</servlet-name>
       <url-pattern>/product</url-pattern>
   </servlet-mapping>
-  
+  <!-- View Count Servlet -->
+  <listener>
+      <listener-class>SessionCounter</listener-class>
+  </listener>
+  <session-config>
+      <session-timeout>1</session-timeout>
+  </session-config>
   <!-- Shopping Cart Servlet -->
   <servlet>
       <servlet-name>checkoutServlet</servlet-name>
