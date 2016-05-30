@@ -83,7 +83,7 @@
                         <%= pepper.SpicyCreative %>
                     </td>
                     <td>
-                        <%= String.format("%.2f", pepper.Price) %>
+                        $<%= String.format("%.2f", pepper.Price) %>
                     </td>
                 </tr>
                 <% } %>
