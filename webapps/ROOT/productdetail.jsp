@@ -24,8 +24,6 @@
     <body>
         <% Pepper p = (Pepper) request.getAttribute("pepper"); %>
         <h1>Peter sells peppers</h1>
-		<% SessionCounter counter = (SessionCounter) session.getAttribute("session-counter"); %>
-		<h2 id='num-viewers'>Current Viewers: <%= counter.getActiveSessionNumber() %></h2>
         <h2 id="pepper-name"><%= p.PepperName %></h2>
 		<hr>
         <div class='prod-info'>
