@@ -39,7 +39,8 @@ public class PeppersRepository {
                 pepper.PepperType = rs.getString("pepper_type");
                 pepper.SpicyCreative = rs.getString("spicy_creative");
                 pepper.SpicyLevel = rs.getString("spicy_level");
-                pepper.Price = rs.getString("price");
+                pepper.Price = rs.getFloat("price");
+                pepper.Description = rs.getString("description");
                 
                 peppers.add(pepper);
             }
@@ -73,7 +74,8 @@ public class PeppersRepository {
                 pepper.PepperType = rs.getString("pepper_type");
                 pepper.SpicyCreative = rs.getString("spicy_creative");
                 pepper.SpicyLevel = rs.getString("spicy_level");
-                pepper.Price = rs.getString("price");
+                pepper.Price = rs.getFloat("price");
+                pepper.Description = rs.getString("description");
             }
             
             return pepper;

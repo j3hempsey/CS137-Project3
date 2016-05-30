@@ -1,5 +1,6 @@
 <%@page import  = "java.util.ArrayList" %>
 <%@page import  = "Models.Pepper"%>
+<%@page import  = "Models.ShoppingCart"%>
 
 <html>
     <head>
@@ -11,6 +12,18 @@
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     </head>
     <body>
+            <%
+                ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("shoppingCart"); 
+                if(sc != null) {
+            %>
+        <div style="text-align:right;padding-right:50px;">
+            <a href="/shoppingcart">
+                Shopping Cart: <%= sc.ShoppingCartItems.size()%>
+            </a>
+        </div>
+            <%
+                }
+            %>
         <h1>Peter sells peppers</h1>
         <div class="subtitle-div">
             Suppliers of the universe's best peppers money can buy.
@@ -20,6 +33,26 @@
                 Management Team
             </div>
         </a>
+        
+        <div align="center">
+            
+        <%
+            ArrayList<Pepper> recentItems = (ArrayList<Pepper>) request.getAttribute("recentItems");
+            if(recentItems != null && recentItems.size() > 0){
+        %>
+        <div style="text-align:center;">Recently Viewed Items</div>
+        <%
+                for (int i = recentItems.size() - 1; i >= 0; i--) {
+                    Pepper p = recentItems.get(i);
+        %>
+        <div>
+            <a href="/product?id=<%= p.ID %>">
+                <%= recentItems.get(i).PepperName %>
+            </a>
+        </div>
+        <% }
+        }%>
+        </div>
 <% ArrayList<Pepper> peppers = (ArrayList<Pepper>)request.getAttribute("peppers");
   if(peppers.size() > 0) {
   %>
@@ -50,7 +83,7 @@
                         <%= pepper.SpicyCreative %>
                     </td>
                     <td>
-                        <%= pepper.Price %>
+                        <%= String.format("%.2f", pepper.Price) %>
                     </td>
                 </tr>
                 <% } %>

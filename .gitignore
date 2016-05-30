@@ -2,3 +2,6 @@
 /run/*
 httpd.conf
 /nbproject/private/
+
+*.orig
+*.class

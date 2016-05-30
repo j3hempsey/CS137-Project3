@@ -10,11 +10,14 @@ public class HomeServlet extends HttpServlet{
         response.setContentType("text/html;charset=UTF-8");
        
         PeppersRepository pr = new PeppersRepository();
-        
         ArrayList<Pepper> peppers = pr.getAllPeppers();
         
         request.setAttribute("peppers", peppers);
-
+        
+        HttpSession session = request.getSession();
+        ArrayList<Pepper> recentlyViewedItems = (ArrayList<Pepper>) session.getAttribute("recentItems");
+        
+        request.setAttribute("recentItems", recentlyViewedItems);
         request.getRequestDispatcher("index.jsp").forward(request, response);
         
     }  // end doGet(

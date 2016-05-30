@@ -42,6 +42,26 @@
       <url-pattern>/product</url-pattern>
   </servlet-mapping>
   
+  <!-- Shopping Cart Servlet -->
+  <servlet>
+      <servlet-name>checkoutServlet</servlet-name>
+      <servlet-class>CheckoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>checkoutServlet</servlet-name>
+      <url-pattern>/shoppingcart</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Update Shopping Cart Servlet -->
+  <servlet>
+      <servlet-name>updateCheckoutServlet</servlet-name>
+      <servlet-class>UpdateCheckoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>updateCheckoutServlet</servlet-name>
+      <url-pattern>/updateshoppingcart</url-pattern>
+  </servlet-mapping>
+  
 
   <!-- exception-type related error pages -->
   <error-page>
