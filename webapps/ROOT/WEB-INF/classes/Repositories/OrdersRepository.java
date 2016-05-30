@@ -44,7 +44,7 @@ public class OrdersRepository {
                 while(orderItemsSet.next()) {
                     OrderItem orderItem = new OrderItem();
                     orderItem.ID = orderItemsSet.getInt("ID");
-                    orderItem.OrderId = orderItemsSet.getInt("order_id");
+                    orderItem.OrderID = orderItemsSet.getInt("order_id");
                     orderItem.PepperID  = orderItemsSet.getInt("pepper_id");
                     orderItem.Quantity = orderItemsSet.getInt("quantity");
                     orderItem.Subtotal = orderItemsSet.getFloat("subtotal");

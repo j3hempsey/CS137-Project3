@@ -13,7 +13,7 @@ import Repositories.PeppersRepository;
  */
 public class OrderItem {
     public int ID;
-    public int OrderId;
+    public int OrderID;
     public int PepperID;
     public int Quantity;
     public float Subtotal;
