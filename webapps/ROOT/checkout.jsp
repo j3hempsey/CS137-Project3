@@ -74,7 +74,7 @@
                             <%= item.Pepper.Description %>
                         </td>
                         <td>
-                            $<%= item.Pepper.Price %>
+                            $<%= String.format("%.2f", item.Pepper.Price) %>
                         </td>
                         <td>
                             <input type="number" value="<%= item.Quantity %>" id="quantity" style="width:60px;" onchange="updateQuantity(this, <%= item.Pepper.ID%>)"/>
