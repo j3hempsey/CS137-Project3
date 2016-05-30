@@ -67,11 +67,10 @@ public class ProductDetailServlet extends HttpServlet {
             //remove it
             if(found) {
                 recentlyViewedItems.remove(pepper);
-            }
-            
-            recentlyViewedItems.add(p);
+            }    
         }
         
+        recentlyViewedItems.add(p);
         session.setAttribute("recentItems", recentlyViewedItems);
         
         request.setAttribute("pepper", p);
