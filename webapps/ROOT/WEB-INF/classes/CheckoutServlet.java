@@ -5,12 +5,18 @@
  */
 
 import Models.Pepper;
+import Models.Order;
+import Models.OrderItem;
 import Models.ShoppingCart;
 import Models.ShoppingCartItem;
 import Models.UpdateShoppingCartResult;
 import Repositories.PeppersRepository;
+import Repositories.OrdersRepository;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.Long;
+import java.lang.Integer;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +45,7 @@ public class CheckoutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
-        
+
         request.setAttribute("shoppingCart", shoppingCart);
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
@@ -56,5 +62,24 @@ public class CheckoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //TODO: IMPLEMENT CHECKING OUT
+        PrintWriter out = response.getWriter();
+        Order newOrder = new Order();
+        newOrder.FirstName = request.getParameter("first_name");
+        newOrder.LastName = request.getParameter("last_name");
+        newOrder.CreditCardNumber = Long.parseLong(request.getParameter("credit_card"), 10);
+        newOrder.StreetAddress = request.getParameter("address");
+        newOrder.State = request.getParameter("state");
+        newOrder.PhoneNumber = Long.parseLong(request.getParameter("phone"), 10);
+        newOrder.Zip = Integer.parseInt(request.getParameter("zip"));
+        //newOrder.OrderItems = (ArrayList<OrderItems>)request.getParameter("orderItems");
+        String shipString = request.getParameter("ship");
+        if (shipString.equals("one-day")) {
+            newOrder.ShippingSpeed = 1;
+        } else if (shipString.equals("two-day")) {
+            newOrder.ShippingSpeed = 2;
+        } else {
+            newOrder.ShippingSpeed = 3;
+        }
+        out.println("Hi " + request.getParameter("first_name"));
     }
 }

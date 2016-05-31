@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : shoppingcart.jsp
     Created on : May 29, 2016, 4:00:45 PM
     Author     : peter
@@ -36,7 +36,7 @@
             <%
                 ShoppingCart shoppingCart = (ShoppingCart) request.getAttribute("shoppingCart");
                 if(shoppingCart != null) {
-                    
+
             %>
             <table>
                 <thead>
@@ -57,7 +57,7 @@
                             Subtotal
                         </th>
                         <th>
-                            
+
                         </th>
                     </tr>
                 </thead>
@@ -111,10 +111,10 @@
             <div>
                 You have no items in your shopping cart!
             </div>
-            <% 
+            <%
                 }
             %>
-            
+
         </div>
         <div class='order'>
 		<hr>
@@ -123,49 +123,49 @@
                     <tbody>
                         <tr>
                             <td>First Name:</td>
-                            <td><input type="text" class="in_txt" id="first-name" onkeyup="checkFirstNameWhileTyping()">
+                            <td><input type="text" class="in_txt" id="first-name" name="first_name" onkeyup="checkFirstNameWhileTyping()">
 							<img src="../images/red_x.gif" alt="Error!" style="width: 20px; height: 20px;" class="hidden" id="first-name-good"></img>
 							<img src="../images/green_check.png" alt="Success!" style="width: 20px; height: 20px;" class="hidden" id="first-name-bad"></img>
                         </td>
                         </tr>
                         <tr>
                             <td>Last Name:</td>
-                            <td><input type="text" class="in_txt" id="last-name" onkeyup="checkLastNameWhileTyping()">
+                            <td><input type="text" class="in_txt" id="last-name" name="last_name" onkeyup="checkLastNameWhileTyping()">
 							<img src="../images/red_x.gif" alt="Error!" style="width: 20px; height: 20px;" class="hidden" id="last-name-good"></img>
 							<img src="../images/green_check.png" alt="Success!" style="width: 20px; height: 20px;" class="hidden" id="last-name-bad"></img>
 							</td>
                         </tr>
                         <tr>
                             <td>Credit Card:</td>
-                            <td><input type="text" class="in_txt" id="credit-card" onkeyup="checkCreditCardWhileTyping()">
+                            <td><input type="text" class="in_txt" id="credit-card" name="credit_card" onkeyup="checkCreditCardWhileTyping()">
 							<img src="../images/red_x.gif" alt="Error!" style="width: 20px; height: 20px;" class="hidden" id="credit-card-good"></img>
 							<img src="../images/green_check.png" alt="Success!" style="width: 20px; height: 20px;" class="hidden" id="credit-card-bad"></img>
 							</td>
                         </tr>
                         <tr>
                             <td>Street Address:</td>
-                            <td><input type="text" class="in_txt" id="address" onkeyup="checkAddressWhileTyping()">
+                            <td><input type="text" class="in_txt" id="address" name="address" onkeyup="checkAddressWhileTyping()">
 							<img src="../images/red_x.gif" alt="Error!" style="width: 20px; height: 20px;" class="hidden" id="address-good"></img>
 							<img src="../images/green_check.png" alt="Success!" style="width: 20px; height: 20px;" class="hidden" id="address-bad"></img>
 							</td>
                         </tr>
 						<tr>
                             <td>Phone Number:</td>
-                            <td><input type="text" class="in_txt" id="phone" onkeyup="checkPhoneWhileTyping()">
+                            <td><input type="text" class="in_txt" id="phone" name="phone" onkeyup="checkPhoneWhileTyping()">
 							<img src="../images/red_x.gif" alt="Error!" style="width: 20px; height: 20px;" class="hidden" id="phone-good"></img>
 							<img src="../images/green_check.png" alt="Success!" style="width: 20px; height: 20px;" class="hidden" id="phone-bad"></img>
 							</td>
                         </tr>
                         <tr>
                             <td>Zip code:</td>
-                            <td><input type="text" class="in_txt" id="zip-code" onkeyup="checkZipCodeWhileTyping()">
+                            <td><input type="text" class="in_txt" id="zip-code" name="zip_code" onkeyup="checkZipCodeWhileTyping()">
 							<img src="../images/red_x.gif" alt="Error!" style="width: 20px; height: 20px;" class="hidden" id="zip-code-good"></img>
 							<img src="../images/green_check.png" alt="Success!" style="width: 20px; height: 20px;" class="hidden" id="zip-code-bad"></img>
 							</td>
                         </tr>
                         <tr>
                             <td>State:</td>
-                            <td><input type="text" class="in_txt" id="state" onkeyup="checkStateWhileTyping()">
+                            <td><input type="text" class="in_txt" id="state" name="state" onkeyup="checkStateWhileTyping()">
 							<img src="../images/red_x.gif" alt="Error!" style="width: 20px; height: 20px;" class="hidden" id="state-good"></img>
 							<img src="../images/green_check.png" alt="Success!" style="width: 20px; height: 20px;" class="hidden" id="state-bad"></img>
 							</td>
@@ -187,7 +187,7 @@
                 </div>
             </form>
         </div>
-            
+
         <script src="../scripts/jquery_2.2.3.min.js"></script>
         <script type="text/javascript">
             function updateQuantity(self, pepperId) {
@@ -208,10 +208,10 @@
                            $('#total').html(total);
                        }
                    },
-                   failure: function(){ }  
+                   failure: function(){ }
                 });
             }
-            
+
             function removeItem(self, pepperId) {
                 $.ajax({
                    type: 'POST',
@@ -227,7 +227,7 @@
                            $('#total').html(total);
                        }
                    },
-                   failure: function(){ }  
+                   failure: function(){ }
                 });
             }
         </script>

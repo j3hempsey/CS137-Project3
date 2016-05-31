@@ -18,11 +18,11 @@ import java.util.ArrayList;
  * @author peter
  */
 public class OrdersRepository {
-    
+
     /**
      * Gets and order by Id
      * @param id
-     * @return 
+     * @return
      */
     public Order getOrderById(int id) {
         try {
@@ -31,8 +31,8 @@ public class OrdersRepository {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM orders where ID = %s", id));
-            
-            while (rs.next()){ 
+
+            while (rs.next()){
 
                 order.ID = rs.getInt("ID");
                 order.CreditCardNumber = rs.getLong("cc_number");
@@ -43,7 +43,7 @@ public class OrdersRepository {
                 order.State = rs.getString("state");
                 order.Zip = rs.getInt("zip");
                 order.ShippingSpeed = rs.getInt("ship_speed");
-                
+
                 ResultSet orderItemsSet = stmt.executeQuery(String.format("SELECT * FROM orderitems where order_id = %s", order.ID ));
                 order.OrderItems = new ArrayList<>();
                 while(orderItemsSet.next()) {
@@ -56,29 +56,29 @@ public class OrdersRepository {
                     order.OrderItems.add(orderItem);
                 }
             }
-            
+
             stmt.close();
 
             return order;
         } catch(SQLException ex) {
-            
+
         }
-        
+
         return null;
     }
-    
+
     /**
      * Creates and order in the database
      * @param order
-     * @return 
+     * @return
      */
     public int createOrder(Order order) {
         try {
             Connection conn = DatabaseContext.getDbConnection();
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(String.format("INSERT INTO orders (first_name, last_name, cc_number, street_addr, phone_num, zip, state, ship_speed) VALUES (%1$s, %2$s,%3$s,%4$s,%5$s,%6$s,%7$s,%8$s)", 
+            stmt.executeUpdate(String.format("INSERT INTO orders (first_name, last_name, cc_number, street_addr, phone_num, zip, state, ship_speed) VALUES (%1$s, %2$s,%3$s,%4$s,%5$s,%6$s,%7$s,%8$s)",
                                             order.FirstName, order.LastName, order.CreditCardNumber, order.StreetAddress, order.PhoneNumber, order.Zip, order.State, order.ShippingSpeed), Statement.RETURN_GENERATED_KEYS);
-            
+
             //Get order id of the inserted order.
             int orderId = -1;
             ResultSet rs = stmt.getGeneratedKeys();
@@ -87,15 +87,17 @@ public class OrdersRepository {
             }
 
             for(OrderItem orderItem : order.OrderItems) {
-               stmt.executeUpdate(String.format("INSERT INTO orderitems (order_id, pepper_id, quantity, subtotal) VALUES (%1$s, %2$s,%3$s,%4$s)", 
-                                            orderId, orderItem.PepperID, orderItem.Quantity, orderItem.Subtotal)); 
+               stmt.executeUpdate(String.format("INSERT INTO orderitems (order_id, pepper_id, quantity, subtotal) VALUES (%1$s, %2$s,%3$s,%4$s)",
+                                            orderId, orderItem.PepperID, orderItem.Quantity, orderItem.Subtotal));
             }
-            
+
             stmt.close();
-            return orderId;
-        } catch(SQLException ex) { };
-        
-        return -1;
+
+        } catch(SQLException ex) {
+            return -1;
+        };
+
+        return 0;
     }
-    
+
 }

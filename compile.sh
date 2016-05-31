@@ -8,6 +8,6 @@ do
 done
 
 if [[ "$?" -eq 0 ]]; then 
-	$CATALINA_HOME/bin/shutdown.sh > /dev/null
+    $CATALINA_HOME/bin/shutdown.sh > /dev/null
     $CATALINA_HOME/bin/startup.sh > /dev/null
 fi
