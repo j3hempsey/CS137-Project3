@@ -37,7 +37,7 @@ public class OrdersRepository {
                 order.ID = rs.getInt("ID");
                 order.CreditCardNumber = rs.getLong("cc_number");
                 order.FirstName = rs.getString("first_name");
-		order.LastName = rs.getString("last_name");
+		        order.LastName = rs.getString("last_name");
                 order.StreetAddress = rs.getString("street_addr");
                 order.PhoneNumber = rs.getLong("phone_num");
                 order.State = rs.getString("state");
@@ -58,6 +58,8 @@ public class OrdersRepository {
             }
             
             stmt.close();
+
+            return order;
         } catch(SQLException ex) {
             
         }
@@ -90,6 +92,7 @@ public class OrdersRepository {
             }
             
             stmt.close();
+            return orderId;
         } catch(SQLException ex) { };
         
         return -1;
