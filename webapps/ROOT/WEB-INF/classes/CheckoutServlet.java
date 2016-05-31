@@ -62,16 +62,30 @@ public class CheckoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //TODO: IMPLEMENT CHECKING OUT
+        HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
+        OrdersRepository orderDb = new OrdersRepository();
         Order newOrder = new Order();
+
         newOrder.FirstName = request.getParameter("first_name");
         newOrder.LastName = request.getParameter("last_name");
         newOrder.CreditCardNumber = Long.parseLong(request.getParameter("credit_card"), 10);
         newOrder.StreetAddress = request.getParameter("address");
         newOrder.State = request.getParameter("state");
         newOrder.PhoneNumber = Long.parseLong(request.getParameter("phone"), 10);
-        newOrder.Zip = Integer.parseInt(request.getParameter("zip"));
-        //newOrder.OrderItems = (ArrayList<OrderItems>)request.getParameter("orderItems");
+        //newOrder.Zip = Integer.parseInt(request.getParameter("zip"));
+        ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
+        ArrayList<OrderItem> itemList = new ArrayList<OrderItem>();
+        OrderItem temp = new OrderItem();
+        for (ShoppingCartItem i : shoppingCart.ShoppingCartItems)
+        {
+            temp.ID = 0;
+            temp.OrderID = 0;
+            temp.PepperID = i.Pepper.ID;
+            temp.Quantity = i.Quantity;
+            temp.Subtotal = i.Pepper.Price * i.Quantity;
+            itemList.add(temp);
+        }
         String shipString = request.getParameter("ship");
         if (shipString.equals("one-day")) {
             newOrder.ShippingSpeed = 1;
@@ -81,5 +95,6 @@ public class CheckoutServlet extends HttpServlet {
             newOrder.ShippingSpeed = 3;
         }
         out.println("Hi " + request.getParameter("first_name"));
+        out.println(orderDb.createOrder(newOrder));
     }
 }
