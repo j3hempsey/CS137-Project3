@@ -73,8 +73,7 @@ public class CheckoutServlet extends HttpServlet {
         newOrder.StreetAddress = request.getParameter("address");
         newOrder.State = request.getParameter("state");
         newOrder.PhoneNumber = Long.parseLong(request.getParameter("phone"), 10);
-        newOrder.Zip = 92111;
-        //newOrder.Zip = Integer.parseInt(request.getParameter("zip"));
+        newOrder.Zip = Integer.parseInt(request.getParameter("zip_code"), 10);
         ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
         ArrayList<OrderItem> itemList = new ArrayList<OrderItem>();
         OrderItem temp = new OrderItem();
@@ -85,8 +84,10 @@ public class CheckoutServlet extends HttpServlet {
             temp.PepperID = i.Pepper.ID;
             temp.Quantity = i.Quantity;
             temp.Subtotal = i.Pepper.Price * i.Quantity;
+            out.println("ADD");
             itemList.add(temp);
         }
+        newOrder.OrderItems = itemList;
         String shipString = request.getParameter("ship");
         if (shipString.equals("one-day")) {
             newOrder.ShippingSpeed = 1;
