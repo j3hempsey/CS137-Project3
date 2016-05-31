@@ -72,14 +72,15 @@ public class OrdersRepository {
      * @param order
      * @return
      */
-    public int createOrder(Order order) {
-        try {
+    public int createOrder(Order order)
+      throws SQLException {
+        // try {
             Connection conn = DatabaseContext.getDbConnection();
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(String.format("INSERT INTO orders (first_name, last_name, cc_number, street_addr, phone_num, zip, state, ship_speed) VALUES (%1$s, %2$s,%3$s,%4$s,%5$s,%6$s,%7$s,%8$s)",
-                                            order.FirstName, order.LastName, order.CreditCardNumber, order.StreetAddress, order.PhoneNumber, order.Zip, order.State, order.ShippingSpeed), Statement.RETURN_GENERATED_KEYS);
-
-            //Get order id of the inserted order.
+            stmt.executeUpdate(String.format("INSERT INTO orders (first_name, last_name, cc_number, street_addr, phone_num, zip, state, ship_speed) VALUES (\"%1$s\", \"%2$s\",\"%3$s\",\"%4$s\",\"%5$s\",\"%6$s\",\"%7$s\",\"%8$s\")",
+              order.FirstName, order.LastName, order.CreditCardNumber, order.StreetAddress,
+              order.PhoneNumber, order.Zip, order.State, order.ShippingSpeed), Statement.RETURN_GENERATED_KEYS);
+            // Get order id of the inserted order.
             int orderId = -1;
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()){
@@ -87,15 +88,16 @@ public class OrdersRepository {
             }
 
             for(OrderItem orderItem : order.OrderItems) {
-               stmt.executeUpdate(String.format("INSERT INTO orderitems (order_id, pepper_id, quantity, subtotal) VALUES (%1$s, %2$s,%3$s,%4$s)",
+               stmt.executeUpdate(String.format("INSERT INTO orderitems (order_id, pepper_id, quantity, subtotal) VALUES (\"%1$s\", \"%2$s\",\"%3$s\",\"%4$s\")",
                                             orderId, orderItem.PepperID, orderItem.Quantity, orderItem.Subtotal));
             }
 
             stmt.close();
 
-        } catch(SQLException ex) {
-            return -1;
-        };
+        // } catch(SQLException ex) {
+        //
+        //     return -1;
+        // };
 
         return 0;
     }

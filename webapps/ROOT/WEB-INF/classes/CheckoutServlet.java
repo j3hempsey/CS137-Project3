@@ -73,6 +73,7 @@ public class CheckoutServlet extends HttpServlet {
         newOrder.StreetAddress = request.getParameter("address");
         newOrder.State = request.getParameter("state");
         newOrder.PhoneNumber = Long.parseLong(request.getParameter("phone"), 10);
+        newOrder.Zip = 92111;
         //newOrder.Zip = Integer.parseInt(request.getParameter("zip"));
         ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
         ArrayList<OrderItem> itemList = new ArrayList<OrderItem>();
@@ -95,6 +96,10 @@ public class CheckoutServlet extends HttpServlet {
             newOrder.ShippingSpeed = 3;
         }
         out.println("Hi " + request.getParameter("first_name"));
-        out.println(orderDb.createOrder(newOrder));
+        try {
+          out.println(orderDb.createOrder(newOrder));
+        } catch (Exception e) {
+          out.println(e);
+        }
     }
 }
