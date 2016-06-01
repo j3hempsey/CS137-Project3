@@ -66,6 +66,7 @@ public class CheckoutServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         OrdersRepository orderDb = new OrdersRepository();
         Order newOrder = new Order();
+        int orderID = 0;
 
         newOrder.FirstName = request.getParameter("first_name");
         newOrder.LastName = request.getParameter("last_name");
@@ -84,7 +85,6 @@ public class CheckoutServlet extends HttpServlet {
             temp.PepperID = i.Pepper.ID;
             temp.Quantity = i.Quantity;
             temp.Subtotal = i.Pepper.Price * i.Quantity;
-            out.println("ADD");
             itemList.add(temp);
         }
         newOrder.OrderItems = itemList;
@@ -96,11 +96,12 @@ public class CheckoutServlet extends HttpServlet {
         } else {
             newOrder.ShippingSpeed = 3;
         }
-        out.println("Hi " + request.getParameter("first_name"));
         try {
-          out.println(orderDb.createOrder(newOrder));
+          orderID = orderDb.createOrder(newOrder);
         } catch (Exception e) {
           out.println(e);
         }
+        //forward to confirmation page
+        response.sendRedirect("/confirmation?orderID=" + orderID);
     }
 }

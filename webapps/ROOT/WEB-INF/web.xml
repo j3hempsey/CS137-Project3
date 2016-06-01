@@ -32,7 +32,7 @@
   </servlet-mapping>
 
   <!-- Product Detail Servlet -->
-  
+
   <servlet>
       <servlet-name>productDetailServlet</servlet-name>
       <servlet-class>ProductDetailServlet</servlet-class>
@@ -57,7 +57,7 @@
       <servlet-name>checkoutServlet</servlet-name>
       <url-pattern>/shoppingcart</url-pattern>
   </servlet-mapping>
-  
+
   <!-- Update Shopping Cart Servlet -->
   <servlet>
       <servlet-name>updateCheckoutServlet</servlet-name>
@@ -67,7 +67,16 @@
       <servlet-name>updateCheckoutServlet</servlet-name>
       <url-pattern>/updateshoppingcart</url-pattern>
   </servlet-mapping>
-  
+  <!--Confirmation servlet-->
+  <servlet>
+      <servlet-name>confirmServlet</servlet-name>
+      <servlet-class>ConfirmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>confirmServlet</servlet-name>
+      <url-pattern>/confirmation</url-pattern>
+  </servlet-mapping>
+
 
   <!-- exception-type related error pages -->
   <error-page>
