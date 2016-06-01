@@ -1,3 +1,7 @@
+<%@page import="Models.OrderItem"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import  = "Models.Order"%>
+
 <html>
     <head>
         <title>Peter Piper's Pickled Peppers</title>
@@ -11,38 +15,96 @@
         <a href="/"><h1>Peter sells peppers</h1></a>
         <h2>Order Confirmation</h2>
         <br>
+        <%
+            Order order = (Order) request.getAttribute("order");
+        %>
         <table>
             <thead></thead>
             <tbody>
                 <tr>
-                    <td> Name: </td>
+                    <td> Name: <%=order.FirstName%> <%=order.LastName%></td>
                     <td> </td>
                 </tr>
                 <tr>
-                    <td>Credit Card:</td>
+                    <td>Credit Card: <%=order.CreditCardNumber%></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Street Address:</td>
+                    <td>Street Address: <%=order.StreetAddress%></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Zip Code:</td>
+                    <td>Zip Code: <%=order.Zip%></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>State:</td>
+                    <td>State: <%=order.State%></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Phone Number:</td>
+                    <td>Phone Number: <%=order.PhoneNumber%></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Shipping Speed</td>
+                    <td>Shipping Speed: <%=order.ShippingSpeed%></td>
                     <td></td>
                 </tr>
             </tbody>
         </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Order ID
+                    </th>
+                    <th>
+                        Pepper Name
+                    </th>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Pepper ID
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Subtotal
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    ArrayList<OrderItem> orderItems = order.OrderItems;
+                    for(OrderItem orderItem : orderItems) {
+                %>
+                <tr style="text-align:left;">
+                    <td>
+                        <%= orderItem.OrderID %>
+                    </td>
+                    <td>
+                        <%= orderItem.getPepper().PepperName %>
+                    </td>
+                    <td>
+                        <%= orderItem.ID %>
+                    </td>
+                    <td>
+                        <%= orderItem.PepperID %>
+                    </td>
+                    <td>
+                        <%= orderItem.Quantity %>
+                    </td>
+                    <td>
+                        <%= orderItem.Subtotal %>
+                    </td>
+                </tr>
+                <%
+                    }
+                %>
+            </tbody>
+        </table>
+                    
     </body>
 </html>

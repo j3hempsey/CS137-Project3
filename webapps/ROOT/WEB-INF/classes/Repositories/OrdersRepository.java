@@ -7,6 +7,8 @@ package Repositories;
 
 import Models.Order;
 import Models.OrderItem;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,8 +27,8 @@ public class OrdersRepository {
      * @return
      */
     public Order getOrderById(int id) {
+        Order order = new Order();
         try {
-            Order order = new Order();
             Connection conn = DatabaseContext.getDbConnection();
             Statement stmt = conn.createStatement();
 
@@ -44,7 +46,9 @@ public class OrdersRepository {
                 order.Zip = rs.getInt("zip");
                 order.ShippingSpeed = rs.getInt("ship_speed");
 
-                ResultSet orderItemsSet = stmt.executeQuery(String.format("SELECT * FROM orderitems where order_id = %s", order.ID ));
+                Statement orderItemsStmt = conn.createStatement();
+                ResultSet orderItemsSet = orderItemsStmt.executeQuery(String.format("SELECT * FROM orderitems where order_id = %s", order.ID ));
+                
                 order.OrderItems = new ArrayList<>();
                 while(orderItemsSet.next()) {
                     OrderItem orderItem = new OrderItem();
@@ -55,16 +59,21 @@ public class OrdersRepository {
                     orderItem.Subtotal = orderItemsSet.getFloat("subtotal");
                     order.OrderItems.add(orderItem);
                 }
+                orderItemsStmt.close();
+
             }
 
             stmt.close();
-
             return order;
-        } catch(SQLException ex) {
 
+        } catch(SQLException ex) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            order.Error = sw.toString(); // stack trace as a string
         }
 
-        return null;
+        return order;
     }
 
     /**

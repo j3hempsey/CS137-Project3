@@ -22,4 +22,5 @@ public class Order {
     public int Zip;
     public ArrayList<OrderItem> OrderItems;
     public int ShippingSpeed;
+    public String Error;
 }

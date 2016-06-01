@@ -1,3 +1,5 @@
+import Models.Order;
+import Repositories.OrdersRepository;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,10 +23,18 @@ public class ConfirmServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String id = request.getParameter("orderID");
-
+        int orderId = Integer.parseInt(id);
+        OrdersRepository orderRepo = new OrdersRepository();
+        Order order = orderRepo.getOrderById(orderId);
+        
         response.setContentType("text/html;charset=UTF-8");
         out.println(id);
-
+        out.println(order.Error);
+        
+        Order testOrder = new Order();
+        testOrder.FirstName = "Test";
+        
+        request.setAttribute("order", order);
         request.getRequestDispatcher("confirmation.jsp").forward(request, response);
     } //end doGet
 }
