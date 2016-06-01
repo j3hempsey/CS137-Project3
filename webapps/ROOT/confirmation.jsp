@@ -8,7 +8,7 @@
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <h1>Peter sells peppers</h1>
+        <a href="/"><h1>Peter sells peppers</h1></a>
         <h2>Order Confirmation</h2>
         <br>
         <table>

@@ -52,8 +52,7 @@
                         <tr>
                             <td>
                                 <div class='product-img'>
-                                <img src='../<%= p.ImageUrl %>' alt='Guantanamo Pepper'
-                     height="180" width="300" >
+                                <img src='../<%= p.ImageUrl %>' alt='Pepper' width="100%" >
                                 </div>
                                 </td>
                         </tr>
