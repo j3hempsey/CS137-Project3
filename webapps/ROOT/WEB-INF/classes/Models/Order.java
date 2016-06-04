@@ -23,4 +23,13 @@ public class Order {
     public ArrayList<OrderItem> OrderItems;
     public int ShippingSpeed;
     public String Error;
+    
+    
+    public float getTotal() {
+        float total = 0;
+        for (OrderItem oi : OrderItems) {
+            total += (oi.Subtotal * oi.Quantity);
+        }
+        return total;
+    }
 }

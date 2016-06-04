@@ -10,6 +10,12 @@
         <link rel="stylesheet" type="text/css" href="stylesheets/home.css">
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+        
+        <style>
+            table, th, td {
+                border: 1px solid white;
+            }
+        </style>
     </head>
     <body>
         <a href="/"><h1>Peter sells peppers</h1></a>
@@ -19,40 +25,40 @@
             Order order = (Order) request.getAttribute("order");
         %>
         <table>
-            <thead></thead>
             <tbody>
                 <tr>
-                    <td> Name: <%=order.FirstName%> <%=order.LastName%></td>
-                    <td> </td>
+                    <td><b>Name</b></td>
+                    <td><%=order.FirstName%> <%=order.LastName%></td>
                 </tr>
                 <tr>
-                    <td>Credit Card: <%=order.CreditCardNumber%></td>
-                    <td></td>
+                    <td><b>Credit Card</b></td>
+                    <td><%=order.CreditCardNumber%></td>
                 </tr>
                 <tr>
-                    <td>Street Address: <%=order.StreetAddress%></td>
-                    <td></td>
+                    <td><b>Street Address</b></td>
+                    <td><%=order.StreetAddress%></td>
                 </tr>
                 <tr>
-                    <td>Zip Code: <%=order.Zip%></td>
-                    <td></td>
+                    <td><b>Zip Code</b></td>
+                    <td><%=order.Zip%></td>
                 </tr>
                 <tr>
-                    <td>State: <%=order.State%></td>
-                    <td></td>
+                    <td><b>State</b></td>
+                    <td><%=order.State%></td>
                 </tr>
                 <tr>
-                    <td>Phone Number: <%=order.PhoneNumber%></td>
-                    <td></td>
+                    <td><b>Phone Number</b></td>
+                    <td><%=order.PhoneNumber%></td>
                 </tr>
                 <tr>
-                    <td>Shipping Speed: <%=order.ShippingSpeed%></td>
-                    <td></td>
+                    <td><b>Shipping Speed</b></td>
+                    <td><%=order.ShippingSpeed%></td>
                 </tr>
             </tbody>
         </table>
-
-        <table>
+        <br><br>
+        <!--Table for orders-->
+        <table style="width:90%">
             <thead>
                 <tr>
                     <th>
@@ -75,36 +81,53 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <%
-                    ArrayList<OrderItem> orderItems = order.OrderItems;
-                    for(OrderItem orderItem : orderItems) {
-                %>
-                <tr style="text-align:left;">
-                    <td>
-                        <%= orderItem.OrderID %>
-                    </td>
-                    <td>
-                        <%= orderItem.getPepper().PepperName %>
-                    </td>
-                    <td>
-                        <%= orderItem.ID %>
-                    </td>
-                    <td>
-                        <%= orderItem.PepperID %>
-                    </td>
-                    <td>
-                        <%= orderItem.Quantity %>
-                    </td>
-                    <td>
-                        <%= orderItem.Subtotal %>
-                    </td>
-                </tr>
-                <%
-                    }
-                %>
-            </tbody>
-        </table>
-                    
+
+        <tbody>
+    <%
+        ArrayList<OrderItem> orderItems = order.OrderItems;
+        for(OrderItem orderItem : orderItems) {
+    %>
+            <tr style="text-align:left;">
+                <td>
+                    <%= orderItem.OrderID %>
+                </td>
+                <td>
+                    <%= orderItem.getPepper().PepperName %>
+                </td>
+                <td>
+                    <%= orderItem.ID %>
+                </td>
+                <td>
+                    <%= orderItem.PepperID %>
+                </td>
+                <td>
+                    <%= orderItem.Quantity %>
+                </td>
+                <td>
+                    <%= orderItem.Subtotal %>
+                </td>
+            </tr>
+        <%
+            }
+        %> 
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    TOTAL:
+                </td>
+                <td align="right">
+                    <%= order.getTotal() %>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+                     
     </body>
 </html>

@@ -77,9 +77,9 @@ public class CheckoutServlet extends HttpServlet {
         newOrder.Zip = Integer.parseInt(request.getParameter("zip_code"), 10);
         ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
         ArrayList<OrderItem> itemList = new ArrayList<OrderItem>();
-        OrderItem temp = new OrderItem();
         for (ShoppingCartItem i : shoppingCart.ShoppingCartItems)
         {
+            OrderItem temp = new OrderItem();
             temp.ID = 0;
             temp.OrderID = 0;
             temp.PepperID = i.Pepper.ID;
